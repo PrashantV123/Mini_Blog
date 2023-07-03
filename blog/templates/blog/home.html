@@ -1,0 +1,40 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+
+
+{% block content %}
+<!-- rember this page description object is comming from Page Class which is not mentioned in views.py; in models.py we have assigned description field as desc-->
+{% for post in page_obj %}
+    <div>
+        <h1 class="display-5 mt-2 mb-3">{{post.title}}</h1>
+        <small>Created by: {{post.user.first_name}} {{post.user.last_name}}</small><br>
+        <small>Published Date: {{post.created}} </small><br>        
+        <p>{{post.desc|safe|truncatewords:100}}</p><a style='color:white' href="{% url 'post' post.id %}">Read More</a><br><br>
+        <small>Updated {{ post.updated|timesince }} ago </small><br>
+        <hr>
+    </div>
+    
+{% endfor %}
+
+
+    <div style='margin-bottom: 20px; text-align: right'>
+        <span>
+            <h5><br>
+            {% if page_obj.has_previous %}
+            <a style='color:white' href="?page={{page_obj.previous_page_number}}">Previous</a>
+            {% endif %}
+
+                <span>Page {{page_obj.number}} of {{page_obj.paginator.num_pages}}</span>
+
+            {% if page_obj.has_next %}
+                <a style='color:white' href="?page={{page_obj.next_page_number}}">Next</a>
+            {% endif %}
+            </h5>  
+
+        </span>
+    </div>
+ 
+
+
+{% endblock content %}
+

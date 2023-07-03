@@ -1,0 +1,20 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+
+
+{% block content %}
+
+    
+    <h2>{{post.title}}</h2>
+    <small>Post Created by: {{post.user.first_name}} {{post.user.last_name}}</small>
+    <small>Date Created: {{post.created}}</small><br><br>
+    <p>{{post.desc|safe}}</p><br>
+    <small>
+        Last Updated on {{post.updated}} 
+        ( {{ post.updated|timesince }} ago )
+    </small><br><br>
+    <div>
+        <a href=" {% url 'home' %} " class='btn btn-danger'>Back to Home</a>
+    </div>
+
+{% endblock content %}

@@ -1,0 +1,45 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="col-sm-10">
+    
+    <div class="jumbotron jumbotron-fluid">
+        <h1 class="display-4 my-5">Signup to make an impact!!</h1> 
+    </div> 
+</div>
+
+{% comment %} <div class="col-sm-5">
+    <form action="" method="post">
+            {% csrf_token %}            
+            <div class="form-group">
+                {{form.as_p}}
+            </div>          
+            <input type="submit" class='btn btn-info success' value="Submit">           
+    </form>
+</div>  {% endcomment %}
+
+<div class="col-sm-7">
+    <form action="" method="post" novalidate>
+            {% csrf_token %}
+            {% for fm in form %}
+            <div class="form-group">
+                {{fm.label_tag}} {{fm}} {{fm.errors|striptags}}<br>
+            </div>            
+            {% endfor %}
+            <input type="submit" class='btn btn-info success' value="Submit">
+            {% if messages %}
+                {% for message in messages %}
+                    <span {% if message.tags %} class='{{message.tags}}'{% endif %} > {{message}}</span>    
+                {% endfor %}
+            {% endif %}
+            {% if form.non_field_errors %}
+                {% for error in form.non_field_errors %}
+                <p>{{error}}</p>
+                {% endfor %}
+            {% endif %}
+    </form>    
+</div> 
+
+{% endblock content %}
